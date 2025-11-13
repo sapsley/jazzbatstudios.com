@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Jazz Bat Studios crafts cozy, character-driven games with a jazz-inspired vibe."
+    />
+    <title>Jazz Bat Studios</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+      crossorigin
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0c0d11;
+        --bg-soft: #181b23;
+        --bg-glow: radial-gradient(
+          circle at top right,
+          rgba(198, 149, 255, 0.4),
+          transparent 45%
+        );
+        --text: #f7f4ff;
+        --muted: #b9b4c8;
+        --accent: #ff5f5f;
+        --accent-2: #fbbe45;
+        --accent-3: #6ae4ff;
+        --card: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.08);
+        font-family: "Space Grotesk", "Segoe UI", system-ui, -apple-system,
+          BlinkMacSystemFont, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+      header {
+        padding: 3rem clamp(1.5rem, 5vw, 5rem);
+        background: var(--bg-glow);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        max-width: 1200px;
+        margin: 0 auto 2.5rem;
+        flex-wrap: wrap;
+      }
+      .logo-group {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .logo {
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      .tag {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 0.35rem 0.85rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .nav-links a {
+        color: var(--text);
+        text-decoration: none;
+        padding: 0.5rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+      }
+      .nav-links a:hover {
+        border-color: var(--border);
+        background: var(--card);
+      }
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(2.75rem, 8vw, 4.5rem);
+        line-height: 1.1;
+        margin: 0 0 1rem;
+      }
+      .hero p {
+        margin-top: 0;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+      .card {
+        padding: 1.75rem;
+        border-radius: 1.2rem;
+        border: 1px solid var(--border);
+        background: var(--card);
+      }
+      .card h3 {
+        margin: 0 0 0.6rem;
+        font-size: 1.2rem;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+      .pill {
+        border-radius: 999px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: transform 200ms ease, box-shadow 200ms ease;
+      }
+      .pill.primary {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: #101010;
+      }
+      .pill.secondary {
+        border-color: var(--border);
+        color: var(--text);
+        background: var(--card);
+      }
+      .pill:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      }
+      main {
+        padding: 0 clamp(1.5rem, 5vw, 5rem);
+      }
+      .section-heading {
+        max-width: 720px;
+        margin: 0 auto 2.5rem;
+        text-align: center;
+      }
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent-3);
+      }
+      .section-heading h2 {
+        margin: 0 0 0.75rem;
+        font-size: clamp(2rem, 6vw, 3rem);
+      }
+      .section-heading p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .games {
+        max-width: 1200px;
+        margin: 4rem auto;
+      }
+      .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .game-card {
+        border-radius: 1.25rem;
+        border: 1px solid var(--border);
+        background: var(--card);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .game-media {
+        position: relative;
+        min-height: 220px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        color: var(--text);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.85rem;
+        font-weight: 600;
+        isolation: isolate;
+      }
+      .game-media::after {
+        content: "";
+        position: absolute;
+        inset: -50%;
+        background: conic-gradient(
+          from 90deg,
+          rgba(255, 95, 95, 0.5),
+          rgba(251, 190, 69, 0.5),
+          rgba(106, 228, 255, 0.5),
+          rgba(255, 95, 95, 0.5)
+        );
+        animation: spin 14s linear infinite;
+        opacity: 0.4;
+      }
+      .game-media::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          145deg,
+          rgba(5, 5, 7, 0.75),
+          rgba(24, 27, 35, 0.85)
+        );
+      }
+      .game-media span {
+        position: relative;
+        z-index: 1;
+        background: rgba(5, 5, 7, 0.4);
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(1turn);
+        }
+      }
+      .game-body {
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .game-body h3 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+      .game-body p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .pill.tertiary {
+        align-self: flex-start;
+        border-color: var(--border);
+        background: transparent;
+        color: var(--text);
+        font-size: 0.85rem;
+      }
+      .pill.tertiary[aria-disabled="true"] {
+        cursor: not-allowed;
+        color: var(--muted);
+      }
+      .team {
+        max-width: 1000px;
+        margin: 4rem auto 5rem;
+        text-align: center;
+      }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.25rem;
+        margin-top: 2rem;
+      }
+      .team-card {
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        background: var(--card);
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .team-card h3 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .team-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .highlight {
+        max-width: 1000px;
+        margin: 0 auto 4rem;
+        padding: 3rem clamp(1.5rem, 5vw, 5rem);
+        border-radius: 1.5rem;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+        color: #101010;
+        text-align: center;
+      }
+      .highlight h2 {
+        margin: 0 0 0.75rem;
+        font-size: clamp(2rem, 6vw, 3rem);
+      }
+      .highlight p {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+      footer {
+        padding: 3rem clamp(1.5rem, 5vw, 5rem);
+        border-top: 1px solid var(--border);
+        background: #050507;
+        color: var(--muted);
+      }
+      footer .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      footer a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo-group">
+          <span class="logo">Jazz Bat Studios</span>
+          <span class="tag">Best friends making cozy games</span>
+        </div>
+        <div class="nav-links">
+          <a href="#games">Games</a>
+          <a href="#team">Team</a>
+          <a href="mailto:hello@jazzbatstudios.com">Contact</a>
+        </div>
+      </nav>
+      <div class="hero">
+        <div>
+          <h1>We craft playful worlds with a jazz-club pulse.</h1>
+          <p>
+            Jazz Bat Studios is an indie duo shipping character-driven games
+            with painterly art, warm storytelling, and music you can hum the
+            rest of the day.
+          </p>
+          <div class="pill-group">
+            <a class="pill primary" href="mailto:hello@jazzbatstudios.com"
+              >Say hello</a
+            >
+            <a class="pill secondary" href="#games">See what we're making</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Currently in the lab</h3>
+          <p>
+            Title TBD · A cozy narrative adventure about nocturnal musicians,
+            rooftop gardens, and the small magic of staying up too late.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="games" id="games">
+        <div class="section-heading">
+          <span class="eyebrow">Games</span>
+          <h2>Adventures currently on the board</h2>
+          <p>
+            Three wildly different prototypes, all sharing the same DNA:
+            stylish art, tactile controls, and plenty of heart.
+          </p>
+        </div>
+        <div class="games-grid">
+          <article class="game-card">
+            <figure
+              class="game-media"
+              aria-label="Placeholder animated screenshot for Skeleton Crew gameplay"
+            >
+              <span>Skeleton Crew Preview</span>
+            </figure>
+            <div class="game-body">
+              <h3>Skeleton Crew</h3>
+              <p>
+                Work together as skeletal deckhands to fend off sharks, hunt for
+                glittering treasure, and square up against the dreaded kraken.
+              </p>
+              <a
+                class="pill tertiary"
+                href="#skeleton-crew-download"
+                aria-disabled="true"
+                >Download (coming soon)</a
+              >
+            </div>
+          </article>
+          <article class="game-card">
+            <figure
+              class="game-media"
+              aria-label="Placeholder animated screenshot for Page Ram gameplay"
+            >
+              <span>Page Ram Preview</span>
+            </figure>
+            <div class="game-body">
+              <h3>Page Ram</h3>
+              <p>
+                Become the unstoppable Page Ram and punch, climb, and smash your
+                way through a neon city on the hunt for the elusive pages.
+              </p>
+              <a
+                class="pill tertiary"
+                href="#page-ram-download"
+                aria-disabled="true"
+                >Download (coming soon)</a
+              >
+            </div>
+          </article>
+          <article class="game-card">
+            <figure
+              class="game-media"
+              aria-label="Placeholder animated screenshot for Pie Division gameplay"
+            >
+              <span>Pie Division Preview</span>
+            </figure>
+            <div class="game-body">
+              <h3>Pie Division</h3>
+              <p>
+                Think those knife skills are sharp? Slice the perfect portion in
+                this playful I-cut-you-choose puzzler built for mobile.
+              </p>
+              <a
+                class="pill tertiary"
+                href="#pie-division-download"
+                aria-disabled="true"
+                >Download (coming soon)</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="team" id="team">
+        <div class="section-heading">
+          <span class="eyebrow">Team</span>
+          <h2>The friends behind the Jazz Bat</h2>
+          <p>
+            We’re a tight-knit crew of collaborators wearing far too many hats
+            and loving every late-night jam session.
+          </p>
+        </div>
+        <div class="team-grid">
+          <article class="team-card">
+            <h3>Spencer</h3>
+            <p>Bio coming soon.</p>
+          </article>
+          <article class="team-card">
+            <h3>Jordan</h3>
+            <p>Bio coming soon.</p>
+          </article>
+          <article class="team-card">
+            <h3>Tyler</h3>
+            <p>Bio coming soon.</p>
+          </article>
+          <article class="team-card">
+            <h3>Jake</h3>
+            <p>Bio coming soon.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="highlight">
+        <h2>Open for cozy collabs and publishing chats.</h2>
+        <p>
+          Need soundtrack help, art consulting, or want to follow our progress?
+          Reach out anytime:
+          <a href="mailto:hello@jazzbatstudios.com">hello@jazzbatstudios.com</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <strong>Jazz Bat Studios</strong>
+          <p>
+            Two best friends building heartfelt indie games from late-night
+            sketches and jam sessions.
+          </p>
+        </div>
+        <div>
+          <strong>Stay in touch</strong>
+          <p>
+            <a href="mailto:hello@jazzbatstudios.com">Email</a><br />
+            <a href="https://twitter.com" target="_blank" rel="noopener"
+              >Twitter</a
+            ><br />
+            <a href="https://discord.com" target="_blank" rel="noopener"
+              >Discord</a
+            >
+          </p>
+        </div>
+        <div>
+          <strong>Now Playing</strong>
+          <p>Heads-down on our debut release. Wishlist info coming soon!</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
