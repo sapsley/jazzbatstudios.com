@@ -19,28 +19,26 @@
       crossorigin
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        color-scheme: dark;
-        --bg: #0c0d11;
-        --bg-soft: #181b23;
-        --bg-glow: radial-gradient(
-          circle at top right,
-          rgba(198, 149, 255, 0.4),
-          transparent 45%
-        );
-        --text: #f7f4ff;
-        --muted: #b9b4c8;
-        --accent: #ff5f5f;
-        --accent-2: #fbbe45;
-        --accent-3: #6ae4ff;
-        --card: rgba(255, 255, 255, 0.05);
-        --border: rgba(255, 255, 255, 0.08);
-        font-family: "Space Grotesk", "Segoe UI", system-ui, -apple-system,
+        color-scheme: light;
+        --font-body: "Space Grotesk", "Segoe UI", system-ui, -apple-system,
           BlinkMacSystemFont, sans-serif;
+        --font-pixel: "Press Start 2P", "Space Grotesk", sans-serif;
+        --bg: #fefbf4;
+        --bg-alt: #fff6df;
+        --bg-panel: #ffffff;
+        --text: #1c1b1f;
+        --muted: #6b6275;
+        --line: #151219;
+        --line-soft: #e5dac4;
+        --accent: #ff5c8a;
+        --accent-2: #3a9efd;
+        --accent-3: #ffb347;
+        --shadow: rgba(21, 18, 25, 0.15);
       }
       * {
         box-sizing: border-box;
@@ -48,13 +46,36 @@
       body {
         margin: 0;
         min-height: 100vh;
+        font-family: var(--font-body);
         background: var(--bg);
         color: var(--text);
-        line-height: 1.5;
+        line-height: 1.7;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: linear-gradient(
+            90deg,
+            rgba(26, 23, 30, 0.06) 1px,
+            transparent 1px
+          ),
+          linear-gradient(0deg, rgba(26, 23, 30, 0.04) 1px, transparent 1px);
+        background-size: 28px 28px;
+        opacity: 0.4;
+        pointer-events: none;
+      }
+      header,
+      main,
+      footer {
+        position: relative;
+        z-index: 1;
       }
       header {
-        padding: 3rem clamp(1.5rem, 5vw, 5rem);
-        background: var(--bg-glow);
+        padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 6vw, 5rem);
+        background: linear-gradient(120deg, #fffef7, #ffeec4 60%, #ffd8d8);
+        border-bottom: 2px solid var(--line-soft);
       }
       nav {
         display: flex;
@@ -62,7 +83,7 @@
         justify-content: space-between;
         gap: 1rem;
         max-width: 1200px;
-        margin: 0 auto 2.5rem;
+        margin: 0 auto clamp(1.5rem, 4vw, 2.5rem);
         flex-wrap: wrap;
       }
       .logo-group {
@@ -71,34 +92,29 @@
         gap: 0.75rem;
       }
       .logo {
-        font-size: 1.25rem;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-      }
-      .tag {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        padding: 0.35rem 0.85rem;
-        font-size: 0.85rem;
-        color: var(--muted);
+        font-family: var(--font-pixel);
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
       }
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        font-size: 0.9rem;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-family: var(--font-pixel);
       }
       .nav-links a {
         color: var(--text);
         text-decoration: none;
         padding: 0.5rem 0.9rem;
-        border-radius: 999px;
-        border: 1px solid transparent;
+        border: 2px solid var(--line);
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 4px 4px 0 var(--line);
       }
       .nav-links a:hover {
-        border-color: var(--border);
-        background: var(--card);
+        background: var(--accent-3);
       }
       .hero {
         max-width: 1200px;
@@ -109,76 +125,32 @@
         align-items: center;
       }
       .hero h1 {
-        font-size: clamp(2.75rem, 8vw, 4.5rem);
-        line-height: 1.1;
+        font-family: var(--font-pixel);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        line-height: 1.6;
         margin: 0 0 1rem;
       }
       .hero p {
         margin-top: 0;
         color: var(--muted);
-        font-size: 1.1rem;
-      }
-      .card {
-        padding: 1.75rem;
-        border-radius: 1.2rem;
-        border: 1px solid var(--border);
-        background: var(--card);
-      }
-      .card h3 {
-        margin: 0 0 0.6rem;
-        font-size: 1.2rem;
-      }
-      .card p {
-        margin: 0;
-        color: var(--muted);
-      }
-      .pill-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
-      }
-      .pill {
-        border-radius: 999px;
-        padding: 0.6rem 1.2rem;
-        font-weight: 600;
-        font-size: 0.95rem;
-        border: 1px solid transparent;
-        cursor: pointer;
-        transition: transform 200ms ease, box-shadow 200ms ease;
-      }
-      .pill.primary {
-        background: linear-gradient(90deg, var(--accent), var(--accent-2));
-        color: #101010;
-      }
-      .pill.secondary {
-        border-color: var(--border);
-        color: var(--text);
-        background: var(--card);
-      }
-      .pill:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        font-size: 1rem;
       }
       main {
-        padding: 0 clamp(1.5rem, 5vw, 5rem);
+        padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 6vw, 5rem);
       }
       .section-heading {
         max-width: 720px;
         margin: 0 auto 2.5rem;
         text-align: center;
       }
-      .eyebrow {
-        display: inline-block;
-        margin-bottom: 0.5rem;
-        font-size: 0.85rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--accent-3);
-      }
       .section-heading h2 {
         margin: 0 0 0.75rem;
-        font-size: clamp(2rem, 6vw, 3rem);
+        font-size: clamp(1.4rem, 4vw, 2.2rem);
+        font-family: var(--font-pixel);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
       .section-heading p {
         margin: 0;
@@ -186,149 +158,203 @@
       }
       .games {
         max-width: 1200px;
-        margin: 4rem auto;
+        margin: 0 auto;
       }
-      .games-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-      .game-card {
-        border-radius: 1.25rem;
-        border: 1px solid var(--border);
-        background: var(--card);
-        overflow: hidden;
+      .games-list {
         display: flex;
         flex-direction: column;
+        gap: 2.5rem;
+      }
+      .game-row {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        border: 2px solid var(--line);
+        border-radius: 28px;
+        background: var(--bg-alt);
+        box-shadow: 10px 10px 0 var(--line);
       }
       .game-media {
+        flex: 1;
+        min-height: 146px;
+        border-radius: 20px;
+        border: 2px solid var(--line);
+        background: linear-gradient(135deg, #fff8d3, #ffd6f0);
         position: relative;
-        min-height: 220px;
-        border-bottom: 1px solid var(--border);
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
         color: var(--text);
         text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-size: 0.85rem;
-        font-weight: 600;
-        isolation: isolate;
+        letter-spacing: 0.08em;
+        font-family: var(--font-pixel);
       }
       .game-media::after {
         content: "";
         position: absolute;
-        inset: -50%;
-        background: conic-gradient(
-          from 90deg,
-          rgba(255, 95, 95, 0.5),
-          rgba(251, 190, 69, 0.5),
-          rgba(106, 228, 255, 0.5),
-          rgba(255, 95, 95, 0.5)
-        );
-        animation: spin 14s linear infinite;
-        opacity: 0.4;
-      }
-      .game-media::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          145deg,
-          rgba(5, 5, 7, 0.75),
-          rgba(24, 27, 35, 0.85)
-        );
+        inset: -20%;
+        background-image: linear-gradient(
+            120deg,
+            rgba(255, 92, 138, 0.3),
+            transparent 45%
+          ),
+          linear-gradient(
+            -120deg,
+            rgba(58, 158, 253, 0.25),
+            transparent 55%
+          );
+        animation: pan 12s linear infinite;
+        opacity: 0.8;
       }
       .game-media span {
         position: relative;
         z-index: 1;
-        background: rgba(5, 5, 7, 0.4);
-        padding: 0.4rem 0.9rem;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 0.6rem 1rem;
+        border: 2px solid var(--line);
+        background: rgba(255, 255, 255, 0.75);
+        border-radius: 14px;
       }
-      @keyframes spin {
+      .game-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+        image-rendering: pixelated;
+      }
+      .game-media.has-image {
+        background: var(--bg-panel);
+      }
+      .game-media.has-image::after {
+        display: none;
+      }
+      .game-media.is-short {
+        min-height: 20px;
+      }
+      @keyframes pan {
         to {
           transform: rotate(1turn);
         }
       }
-      .game-body {
-        padding: 1.75rem;
+      .game-info {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 1rem;
       }
-      .game-body h3 {
+      .game-info h3 {
+        font-family: var(--font-pixel);
         margin: 0;
-        font-size: 1.35rem;
+        font-size: 1.1rem;
+        letter-spacing: 0.05em;
       }
-      .game-body p {
+      .game-info p {
         margin: 0;
         color: var(--muted);
       }
-      .pill.tertiary {
+      .game-label {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--accent-3);
+        font-family: var(--font-pixel);
+      }
+      .download-link {
         align-self: flex-start;
-        border-color: var(--border);
-        background: transparent;
+        font-family: var(--font-pixel);
+        font-size: 0.7rem;
+        text-transform: uppercase;
         color: var(--text);
-        font-size: 0.85rem;
+        border: 2px solid var(--line);
+        border-radius: 12px;
+        padding: 0.6rem 1rem;
+        text-decoration: none;
+        background: #ffffff;
+        box-shadow: 6px 6px 0 var(--line);
       }
-      .pill.tertiary[aria-disabled="true"] {
-        cursor: not-allowed;
+      .download-link[aria-disabled="true"] {
         color: var(--muted);
+        border-color: var(--line-soft);
+        box-shadow: 6px 6px 0 var(--line-soft);
+        cursor: not-allowed;
+      }
+      @media (min-width: 900px) {
+        .game-row {
+          flex-direction: row;
+          align-items: center;
+        }
+        .game-row:nth-child(even) {
+          flex-direction: row-reverse;
+        }
+        .game-row:nth-child(even) .game-info {
+          text-align: right;
+          align-items: flex-end;
+        }
+        .game-row:nth-child(even) .download-link {
+          align-self: flex-end;
+        }
       }
       .team {
         max-width: 1000px;
-        margin: 4rem auto 5rem;
+        margin: 4rem auto;
         text-align: center;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        border: 2px dashed var(--line);
+        border-radius: 32px;
+        background: #ffffff;
+        box-shadow: 8px 8px 0 var(--shadow);
       }
       .team-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
         margin-top: 2rem;
       }
       .team-card {
-        border-radius: 1rem;
-        border: 1px solid var(--border);
-        background: var(--card);
-        padding: 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
+        border-radius: 18px;
+        border: 2px solid var(--line);
+        background: var(--bg-alt);
+        padding: 1.5rem 1rem;
+        box-shadow: 6px 6px 0 var(--line);
       }
       .team-card h3 {
-        margin: 0;
-        font-size: 1.2rem;
+        margin: 0 0 0.6rem;
+        font-family: var(--font-pixel);
+        font-size: 0.95rem;
+        letter-spacing: 0.04em;
       }
       .team-card p {
         margin: 0;
         color: var(--muted);
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
       .highlight {
         max-width: 1000px;
         margin: 0 auto 4rem;
-        padding: 3rem clamp(1.5rem, 5vw, 5rem);
-        border-radius: 1.5rem;
-        background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
-        color: #101010;
-        text-align: center;
+        padding: clamp(2rem, 5vw, 3rem);
+        border-radius: 28px;
+        border: 2px solid var(--line);
+        background: linear-gradient(135deg, #fff4c3, #ffe1f5);
+        text-align:center;
+        box-shadow: 10px 10px 0 var(--line);
       }
       .highlight h2 {
         margin: 0 0 0.75rem;
-        font-size: clamp(2rem, 6vw, 3rem);
+        font-family: var(--font-pixel);
+        font-size: clamp(1.2rem, 4vw, 2rem);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
       .highlight p {
         margin: 0;
-        font-size: 1.1rem;
+        color: var(--text);
       }
       footer {
-        padding: 3rem clamp(1.5rem, 5vw, 5rem);
-        border-top: 1px solid var(--border);
-        background: #050507;
-        color: var(--muted);
+        padding: clamp(2rem, 5vw, 3rem);
+        border-top: 2px solid var(--line);
+        background: #fffdf2;
+        color: var(--text);
       }
       footer .footer-grid {
         display: grid;
@@ -337,8 +363,13 @@
         max-width: 1200px;
         margin: 0 auto;
       }
+      footer strong {
+        font-family: var(--font-pixel);
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+      }
       footer a {
-        color: var(--text);
+        color: var(--accent);
         text-decoration: none;
       }
       footer a:hover {
@@ -351,7 +382,6 @@
       <nav>
         <div class="logo-group">
           <span class="logo">Jazz Bat Studios</span>
-          <span class="tag">Best friends making cozy games</span>
         </div>
         <div class="nav-links">
           <a href="#games">Games</a>
@@ -361,25 +391,7 @@
       </nav>
       <div class="hero">
         <div>
-          <h1>We craft playful worlds with a jazz-club pulse.</h1>
-          <p>
-            Jazz Bat Studios is an indie duo shipping character-driven games
-            with painterly art, warm storytelling, and music you can hum the
-            rest of the day.
-          </p>
-          <div class="pill-group">
-            <a class="pill primary" href="mailto:hello@jazzbatstudios.com"
-              >Say hello</a
-            >
-            <a class="pill secondary" href="#games">See what we're making</a>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Currently in the lab</h3>
-          <p>
-            Title TBD · A cozy narrative adventure about nocturnal musicians,
-            rooftop gardens, and the small magic of staying up too late.
-          </p>
+          <h1>Best friends making the best games</h1>
         </div>
       </div>
     </header>
@@ -387,74 +399,79 @@
     <main>
       <section class="games" id="games">
         <div class="section-heading">
-          <span class="eyebrow">Games</span>
-          <h2>Adventures currently on the board</h2>
+          <h2>Games</h2>
           <p>
             Three wildly different prototypes, all sharing the same DNA:
-            stylish art, tactile controls, and plenty of heart.
+            stylish art, creative gameplay, and plenty of heart.
           </p>
         </div>
-        <div class="games-grid">
-          <article class="game-card">
-            <figure
-              class="game-media"
-              aria-label="Placeholder animated screenshot for Skeleton Crew gameplay"
-            >
-              <span>Skeleton Crew Preview</span>
-            </figure>
-            <div class="game-body">
+        <div class="games-list">
+          <article class="game-row">
+            <div class="game-media has-image">
+              <img
+                src="assets/images/skeleton-crew-1.gif"
+                alt="Skeleton Crew co-op pirate ship gameplay"
+              />
+            </div>
+            <div class="game-info">
+              <p class="game-label">Co-op chaos</p>
               <h3>Skeleton Crew</h3>
               <p>
                 Work together as skeletal deckhands to fend off sharks, hunt for
                 glittering treasure, and square up against the dreaded kraken.
               </p>
               <a
-                class="pill tertiary"
-                href="#skeleton-crew-download"
-                aria-disabled="true"
-                >Download (coming soon)</a
+                class="download-link"
+                href="assets/games/skeletoncrew-v0.7.exe"
+                download
+                >Windows Download</a
               >
             </div>
           </article>
-          <article class="game-card">
-            <figure
-              class="game-media"
-              aria-label="Placeholder animated screenshot for Page Ram gameplay"
-            >
-              <span>Page Ram Preview</span>
-            </figure>
-            <div class="game-body">
+          <article class="game-row">
+            <div class="game-media has-image">
+              <img
+                src="assets/images/page-ram-1.gif"
+                alt="Page Ram character smashing through the city"
+              />
+            </div>
+            <div class="game-info">
+              <p class="game-label">Arcade mayhem</p>
               <h3>Page Ram</h3>
               <p>
                 Become the unstoppable Page Ram and punch, climb, and smash your
                 way through a neon city on the hunt for the elusive pages.
               </p>
               <a
-                class="pill tertiary"
+                class="download-link"
                 href="#page-ram-download"
                 aria-disabled="true"
-                >Download (coming soon)</a
+                >Download coming soon</a
               >
             </div>
           </article>
-          <article class="game-card">
-            <figure
-              class="game-media"
-              aria-label="Placeholder animated screenshot for Pie Division gameplay"
+          <article class="game-row">
+            <div
+              class="game-media has-image is-short"
+              aria-label="Animated Pie Division gameplay preview placeholder"
             >
-              <span>Pie Division Preview</span>
-            </figure>
-            <div class="game-body">
+              <img
+                src="assets/images/pie-div-1.gif"
+                alt="Pie Division gameplay slice preview"
+              />
+            </div>
+            <div class="game-info">
+              <p class="game-label">Precision puzzler</p>
               <h3>Pie Division</h3>
               <p>
                 Think those knife skills are sharp? Slice the perfect portion in
                 this playful I-cut-you-choose puzzler built for mobile.
               </p>
               <a
-                class="pill tertiary"
+                class="download-link"
                 href="#pie-division-download"
                 aria-disabled="true"
-                >Download (coming soon)</a
+                >Download coming soon</a
               >
             </div>
           </article>
@@ -463,11 +480,9 @@
 
       <section class="team" id="team">
         <div class="section-heading">
-          <span class="eyebrow">Team</span>
-          <h2>The friends behind the Jazz Bat</h2>
+          <h2>TEAM</h2>
           <p>
-            We’re a tight-knit crew of collaborators wearing far too many hats
-            and loving every late-night jam session.
+            
           </p>
         </div>
         <div class="team-grid">
@@ -491,7 +506,7 @@
       </section>
 
       <section class="highlight">
-        <h2>Open for cozy collabs and publishing chats.</h2>
+        <h2>Jam with us.</h2>
         <p>
           Need soundtrack help, art consulting, or want to follow our progress?
           Reach out anytime:
@@ -505,8 +520,7 @@
         <div>
           <strong>Jazz Bat Studios</strong>
           <p>
-            Two best friends building heartfelt indie games from late-night
-            sketches and jam sessions.
+            Four best friends building rad indie games powered by memes and discord chats.
           </p>
         </div>
         <div>
